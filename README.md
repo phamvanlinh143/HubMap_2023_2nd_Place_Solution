@@ -65,6 +65,7 @@ mmdetection
 │   ├── hm_1cls                     # extracted phamvanlinh143/hubmap-coco-datasets dataset
 │   ├── hm_9tiles_crop128_1cls      # extracted phamvanlinh143/hubmap-coco-datasets dataset
 │   ├── stain_9tiles_augs           # extracted phamvanlinh143/hubmap-stain-9tiles-augs dataset
+│   ├── stain_augs                  # extracted phamvanlinh143/hubmap-stain-augs dataset
 │   ├── test                        # extracted hubmap-hacking-the-human-vasculature dataset
 │   ├── train                       # extracted hubmap-hacking-the-human-vasculature dataset
 │   └── train_9tiles_crop128        # extracted phamvanlinh143/hubmap-train-9tiles-crop128 dataset
