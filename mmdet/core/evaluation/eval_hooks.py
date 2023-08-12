@@ -7,6 +7,7 @@ import torch.distributed as dist
 from mmcv.runner import DistEvalHook as BaseDistEvalHook
 from mmcv.runner import EvalHook as BaseEvalHook
 from torch.nn.modules.batchnorm import _BatchNorm
+from pathlib import Path
 
 
 def _calc_dynamic_intervals(start_interval, dynamic_interval_list):
@@ -26,6 +27,9 @@ class EvalHook(BaseEvalHook):
     def __init__(self, *args, dynamic_intervals=None, **kwargs):
         super(EvalHook, self).__init__(*args, **kwargs)
         self.latest_results = None
+
+        self.max_swa = 5
+        self.swa_infos = dict()
 
         self.use_dynamic_intervals = dynamic_intervals is not None
         if self.use_dynamic_intervals:
@@ -61,11 +65,41 @@ class EvalHook(BaseEvalHook):
         self.latest_results = results
         runner.log_buffer.output['eval_iter_num'] = len(self.dataloader)
         key_score = self.evaluate(runner, results)
+
+        if key_score:
+            self.tracking_for_swa(runner, key_score)
         # the key_score may be `None` so it needs to skip the action to save
         # the best checkpoint
         if self.save_best and key_score:
+            # if self.best_ckpt_path and self.file_client.isfile(self.best_ckpt_path):
+            #     best_ckpt_path = Path(self.best_ckpt_path)
+            #     backup_ckpt_name = f"bk_{best_ckpt_path.name}"
+            #     runner.save_checkpoint(self.out_dir, filename_tmpl=backup_ckpt_name, save_optimizer=False, create_symlink=False)
             self._save_ckpt(runner, key_score)
 
+    def save_for_swa(self, runner, cur_epoch):
+        ckpt_name = f"swa_ep_{int(cur_epoch) + 1}.pth"
+        runner.save_checkpoint(self.out_dir, filename_tmpl=ckpt_name, save_optimizer=False, create_symlink=False)
+
+    def del_for_swa(self, epoch):
+        ckpt_name = f"swa_ep_{int(epoch) + 1}.pth"
+        ckpt_path = self.file_client.join_path(self.out_dir, ckpt_name)
+        self.file_client.remove(ckpt_path)
+    
+    def tracking_for_swa(self, runner, key_score):
+        cur_epoch = runner.epoch
+        if len(self.swa_infos) < self.max_swa:
+            self.swa_infos[str(cur_epoch)] = key_score
+            self.save_for_swa(runner, cur_epoch)
+        else:
+            min_info = min(self.swa_infos.items(), key=lambda x: x[1]) 
+            if key_score > min_info[1]:
+                
+                self.swa_infos.pop(min_info[0])
+                self.del_for_swa(min_info[0])
+                
+                self.swa_infos[str(cur_epoch)] = key_score
+                self.save_for_swa(runner, cur_epoch)
 
 # Note: Considering that MMCV's EvalHook updated its interface in V1.3.16,
 # in order to avoid strong version dependency, we did not directly
