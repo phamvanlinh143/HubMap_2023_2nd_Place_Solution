@@ -526,7 +526,6 @@ data = dict(
     persistent_workers=True)
 
 
-
 evaluation = dict(save_best='auto', rule="greater", interval=1, metric=['segm', 'bbox'])
 
 work_dir = 'workdirs/9tiles_crop128/swin_t/ds1_full_ft/'

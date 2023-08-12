@@ -33,8 +33,6 @@ runner = dict(type='EpochBasedRunner', max_epochs=40)
 
 fp16 = dict(loss_scale=dict(init_scale=512))
 
-# optimizer = dict(type='SGD', lr=0.00125, momentum=0.9, weight_decay=0.0001)
-# optimizer = dict(type='Adam', lr=0.00125)
 optimizer = dict(
     constructor='LearningRateDecayOptimizerConstructor',
     type='AdamW',

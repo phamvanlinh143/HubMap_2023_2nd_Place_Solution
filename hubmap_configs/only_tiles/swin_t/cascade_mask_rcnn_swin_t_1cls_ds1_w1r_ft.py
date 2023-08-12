@@ -11,7 +11,7 @@ custom_hooks = [dict(type='NumClassCheckHook')]
 
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-load_from = 'workdirs/only_tiles/swin_t/ds1_w1r_ft/swa_last.pth'
+load_from = 'workdirs/only_tiles/swin_t/ds1_w1r_pt/swa_last.pth'
 resume_from = None
 workflow = [('train', 1)]
 #################################################################################
@@ -255,8 +255,6 @@ model = dict(
 
 
 #########################################################################
-
-####################################
 
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)

@@ -529,7 +529,7 @@ test_set = test=dict(
         pipeline=test_pipeline)
 
 data = dict(
-    samples_per_gpu=4,
+    samples_per_gpu=8,
     workers_per_gpu=4,
     train=[train_set1, train_set2, train_set3,
            train_set4, train_set5, train_set6,

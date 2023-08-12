@@ -12,7 +12,7 @@ custom_hooks = [dict(type='NumClassCheckHook')]
 
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-load_from = '/storage-ocr/linhpv10/VTCC_DATA/libs/mmdetection/workdir_hhv_ds/cascade_mask_rcnn_swin_t_1cls_crop128_ds1_w1l_pt/swa_last.pth'
+load_from = 'workdirs/9tiles_crop128/swin_t/ds1_w1l_pt/swa_last.pth'
 resume_from = None
 workflow = [('train', 1)]
 #################################################################################

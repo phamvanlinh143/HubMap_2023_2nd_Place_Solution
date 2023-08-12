@@ -506,4 +506,4 @@ data = dict(
 
 evaluation = dict(save_best='auto', rule="greater", interval=1, metric=['segm', 'bbox'])
 
-work_dir = 'workdirs/only_tiles/convnext_t/ds1_w1l_pt/'
+work_dir = 'workdirs/only_tiles/convnext_t/ds1_w1l_ft/'

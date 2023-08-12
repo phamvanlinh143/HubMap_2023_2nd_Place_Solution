@@ -12,7 +12,7 @@ custom_hooks = [dict(type='NumClassCheckHook')]
 
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-load_from = 'workdirs/9tiles_crop128/coat_small/ds1_w2l_pt/swa_last.pth'
+load_from = 'workdirs/9tiles_crop128/coat_small/ds1_w2r_pt/swa_last.pth'
 resume_from = None
 workflow = [('train', 1)]
 #################################################################################
@@ -505,5 +505,5 @@ data = dict(
 
 evaluation = dict(save_best='auto', rule="greater", interval=1, metric=['segm', 'bbox'])
 
-work_dir = 'workdirs/9tiles_crop128/coat_small/ds1_w2l_ft/'
+work_dir = 'workdirs/9tiles_crop128/coat_small/ds1_w2r_ft/'
 
