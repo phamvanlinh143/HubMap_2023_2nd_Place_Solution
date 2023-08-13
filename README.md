@@ -94,7 +94,7 @@ HubMap_2023_2nd_Place_Solution
     └── wsi_meta.csv                # extracted hubmap-hacking-the-human-vasculature dataset 
 ``` 
 ### How to create `hm_1cls` (COCO Format) and `stain_augs`
-```
+```python
     # create hm_1cls
     cd hubmap_dataprocessing/
     python coco_gen_only_tiles_1cls.py
@@ -106,7 +106,7 @@ HubMap_2023_2nd_Place_Solution
     cd ..
 ```
 ### How to create `train_9tiles_crop128`, `hm_9tiles_crop128_1cls` (COCO Format), and `stain_9tiles_augs`
-```
+```python
     # create train_9tiles_crop128
     cd hubmap_dataprocessing/
     python merge_9tiles.py
@@ -145,19 +145,19 @@ Notes to naming:
     ***Example: Training fold 0 Swin-T***
 
     - Step 1: Pretraining for fold 0
-        ```
+        ```python
         CUDA_VISIBLE_DEVICES=0 python tools/train.py hubmap_configs/only_tiles/swin_t/cascade_mask_rcnn_swin_t_1cls_ds1_w1l_pt.py
         ```
     - Step 2: Do SWA for pretrained checkpoints (checkpoints were saved at workdir: `workdirs/only_tiles/swin_t/ds1_w1l_pt/`)
-        ```
+        ```python
         python do_swa.py --workdir workdirs/only_tiles/swin_t/ds1_w1l_pt/
         ```
     - Step 3: Finetune for fold 0 (remember to verify pretrained checkpoint after doing swa at step 2)
-        ```
+        ```python
         CUDA_VISIBLE_DEVICES=0 python tools/train.py hubmap_configs/only_tiles/swin_t/cascade_mask_rcnn_swin_t_1cls_ds1_w1l_ft.py
         ```
     - Step 4: Do SWA for finetune checkpoints (checkpoints were saved at workdir: `workdirs/only_tiles/swin_t/ds1_w1l_ft/`)
-        ```
+        ```python
         python do_swa.py --workdir workdirs/only_tiles/swin_t/ds1_w1l_ft/
         ```
         Final weight of Swin-T fold 0: `workdirs/only_tiles/swin_t/ds1_w1l_ft/swa_last.pth`
@@ -168,19 +168,19 @@ Notes to naming:
     ***Example: Training fold 1 Coat-Small***
 
     - Step 1: Pretraining for fold 1
-        ```
+        ```python
         CUDA_VISIBLE_DEVICES=0 python tools/train.py hubmap_configs/9tiles_crop128/coat_small/cascade_mask_rcnn_coat_small_1cls_crop128_ds1_w1r_pt.py
         ```
     - Step 2: Do SWA for pretrained checkpoints (checkpoints were saved at workdir: `workdirs/9tiles_crop128/coat_small/ds1_w1r_pt/`)
-        ```
+        ```python
         python do_swa.py --workdir workdirs/9tiles_crop128/coat_small/ds1_w1r_pt/
         ```
     - Step 3: Finetune for fold 1 (remember to verify pretrained checkpoint after doing swa at step 2)
-        ```
+        ```python
         CUDA_VISIBLE_DEVICES=0 python tools/train.py hubmap_configs/9tiles_crop128/coat_small/cascade_mask_rcnn_coat_small_1cls_crop128_ds1_w1r_ft.py
         ```
     - Step 4: Do SWA for finetune checkpoints (checkpoints were saved at workdir: `workdirs/9tiles_crop128/coat_small/ds1_w1r_ft/`)
-        ```
+        ```python
         python do_swa.py --workdir workdirs/9tiles_crop128/coat_small/ds1_w1r_ft/
         ```
         Final weight of Swin-T fold 1: `workdirs/9tiles_crop128/coat_small/ds1_w1r_ft/swa_last.pth`
