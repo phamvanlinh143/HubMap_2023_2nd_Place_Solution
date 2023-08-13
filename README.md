@@ -72,11 +72,11 @@ HubMap_2023_2nd_Place_Solution
 │   ├── stain_augs                  # extracted phamvanlinh143/hubmap-stain-augs dataset
 │   ├── test                        # extracted hubmap-hacking-the-human-vasculature dataset
 │   ├── train                       # extracted hubmap-hacking-the-human-vasculature dataset
+│   ├── train_9tiles_crop128        # extracted phamvanlinh143/hubmap-train-9tiles-crop128 dataset
 │   ├── cleaned_polygons.jsonl      # ref: https://www.kaggle.com/code/fnands/de-duplicate-labels
 │   ├── polygons.jsonl              # extracted hubmap-hacking-the-human-vasculature dataset
 │   ├── tile_meta.csv               # extracted hubmap-hacking-the-human-vasculature dataset
-│   ├── wsi_meta.csv                # extracted hubmap-hacking-the-human-vasculature dataset
-│   └── train_9tiles_crop128        # extracted phamvanlinh143/hubmap-train-9tiles-crop128 dataset
+│   └── wsi_meta.csv                # extracted hubmap-hacking-the-human-vasculature dataset 
 └── other folders (folked from mmdetection)
 ``` 
 
