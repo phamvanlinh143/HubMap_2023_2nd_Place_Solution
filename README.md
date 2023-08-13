@@ -10,7 +10,7 @@ This documentation outlines how to reproduce the 2nd place solution for HubMap -
 
 ## Conda environment setup
 ```bash
-conda create --name hubmap python=3.10 -y
+conda create --name hubmap python=3.8 -y
 conda activate hubmap
 
 # install pytorch
@@ -19,15 +19,19 @@ pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --e
 # install mmcv-full
 pip install mmcv-full==1.6.0
 
-pip install einops==0.6.1 timm==0.5.4 pandas PyYaml 
+pip install einops==0.6.1 timm==0.5.4 pandas PyYaml natsort 
+
+# install staintools
+conda install -c conda-forge python-spams
+pip install staintools
 
 git clone https://github.com/phamvanlinh143/mmdetection.git
 cd mmdetection
 pip install -r requirements.txt
 pip install -v -e .
 
-# install mmcls and albumentations==1.3.0
-pip install mmcls==0.25.0 albumentations==1.3.0
+# install mmcls and albumentations==1.3.0 scipy==1.8.1
+pip install mmcls==0.25.0 albumentations==1.3.0 scipy==1.8.1
 ```
 ## Backbone References:
 
@@ -68,9 +72,60 @@ mmdetection
 │   ├── stain_augs                  # extracted phamvanlinh143/hubmap-stain-augs dataset
 │   ├── test                        # extracted hubmap-hacking-the-human-vasculature dataset
 │   ├── train                       # extracted hubmap-hacking-the-human-vasculature dataset
+│   ├── cleaned_polygons.jsonl      # ref: https://www.kaggle.com/code/fnands/de-duplicate-labels
+│   ├── polygons.jsonl              # extracted hubmap-hacking-the-human-vasculature dataset
+│   ├── tile_meta.csv               # extracted hubmap-hacking-the-human-vasculature dataset
+│   ├── wsi_meta.csv                # extracted hubmap-hacking-the-human-vasculature dataset
 │   └── train_9tiles_crop128        # extracted phamvanlinh143/hubmap-train-9tiles-crop128 dataset
 └── other folders (folked from mmdetection)
 ``` 
+
+***You can create folders in `datasets` (it is not necessary to download datasets from phamvanlinh143/\*)***
+
+***Requirement: Directory structure of `datasets` should be as follows.***
+```
+mmdetection
+└── datasets
+    ├── test                        # extracted hubmap-hacking-the-human-vasculature dataset
+    ├── train                       # extracted hubmap-hacking-the-human-vasculature dataset
+    ├── cleaned_polygons.jsonl      # ref: https://www.kaggle.com/code/fnands/de-duplicate-labels
+    ├── polygons.jsonl              # extracted hubmap-hacking-the-human-vasculature dataset
+    ├── tile_meta.csv               # extracted hubmap-hacking-the-human-vasculature dataset
+    └── wsi_meta.csv                # extracted hubmap-hacking-the-human-vasculature dataset 
+``` 
+### How to create `hm_1cls` (COCO Format) and `stain_augs`
+```
+    # create hm_1cls
+    cd hubmap_dataprocessing/
+    python coco_gen_only_tiles_1cls.py
+
+    # Note: refs_stain.csv => (filtered from tile_meta.csv - ignore dataset 1)
+    # create stain_augs
+    python gen_stain_only_tiles.py # it will take much time
+
+    cd ..
+```
+### How to create `train_9tiles_crop128`, `hm_9tiles_crop128_1cls` (COCO Format), and `stain_9tiles_augs`
+```
+    # create train_9tiles_crop128
+    cd hubmap_dataprocessing/
+    python merge_9tiles.py
+    python crop128_9tiles.py
+
+    # create hm_9tiles_crop128_1cls
+    python coco_gen_9tiles_crop128_1cls.py
+
+    # create stain_9tiles_augs
+    python gen_stain_9tiles.py # it will take much time
+
+    # remove anno_9tiles and annos_9tiles_crop128
+    rm -rf anno_9tiles
+    rm -rf annos_9tiles_crop128
+    # remove train_9tiles folder in datasets
+    rm -rf ../datasets/train_9tiles
+    
+    cd ..
+```
 
 ## Models Training:
 
