@@ -95,6 +95,9 @@ HubMap_2023_2nd_Place_Solution
 ``` 
 #### How to create `hm_1cls` (COCO Format) and `stain_augs`
 ```python
+    # (optional) create dataset_splits/
+    # run notebook data_prepare.ipynb
+
     # create hm_1cls
     cd hubmap_dataprocessing/
     python coco_gen_only_tiles_1cls.py
