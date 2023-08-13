@@ -25,8 +25,8 @@ pip install einops==0.6.1 timm==0.5.4 pandas PyYaml natsort
 conda install -c conda-forge python-spams
 pip install staintools
 
-git clone https://github.com/phamvanlinh143/mmdetection.git
-cd mmdetection
+git clone https://github.com/phamvanlinh143/HubMap_2023_2nd_Place_Solution.git
+cd HubMap_2023_2nd_Place_Solution
 pip install -r requirements.txt
 pip install -v -e .
 
@@ -42,7 +42,7 @@ pip install mmcls==0.25.0 albumentations==1.3.0 scipy==1.8.1
 | Cascade Mask R-CNN | ConvNeXt-T | [ConvNeXt](https://github.com/open-mmlab/mmpretrain/blob/mmcls-0.x/mmcls/models/backbones/convnext.py) | [convnext_t_pretrained](https://download.openmmlab.com/mmdetection/v2.0/convnext/cascade_mask_rcnn_convnext-t_p4_w7_fpn_giou_4conv1f_fp16_ms-crop_3x_coco/cascade_mask_rcnn_convnext-t_p4_w7_fpn_giou_4conv1f_fp16_ms-crop_3x_coco_20220509_204200-8f07c40b.pth) |
 | Cascade Mask R-CNN | ConvNeXt-S | [ConvNeXt](https://github.com/open-mmlab/mmpretrain/blob/mmcls-0.x/mmcls/models/backbones/convnext.py) | [convnext_s_pretrained](https://download.openmmlab.com/mmdetection/v2.0/convnext/cascade_mask_rcnn_convnext-s_p4_w7_fpn_giou_4conv1f_fp16_ms-crop_3x_coco/cascade_mask_rcnn_convnext-s_p4_w7_fpn_giou_4conv1f_fp16_ms-crop_3x_coco_20220510_201004-3d24f5a4.pth) |
 
-***Download pretained-weights and save to `mmdetection/pretrained_weights` folder***
+***Download pretained-weights and save to `HubMap_2023_2nd_Place_Solution/pretrained_weights` folder***
 
 ## Data Preparation
 
@@ -54,12 +54,12 @@ Please download the following datasets from the Kaggle:
 - `kaggle datasets download -d phamvanlinh143/hubmap-stain-9tiles-augs`
 - `kaggle datasets download -d phamvanlinh143/hubmap-coco-datasets`
 
-***Download datasets and save to `mmdetection/datasets` folder***
+***Download datasets and save to `HubMap_2023_2nd_Place_Solution/datasets` folder***
 
 Directory structure should be as follows.
 
 ```
-mmdetection
+HubMap_2023_2nd_Place_Solution
 ├── pretrained_weights
 │   ├── cascade_mask_rcnn_coat_small_mstrain_480-800_giou_4conv1f_adamw_3x_coco_4f7a069e.pth
 │   ├── cascade_mask_rcnn_convnext-s_p4_w7_fpn_giou_4conv1f_fp16_ms-crop_3x_coco_20220510_201004-3d24f5a4.pth
@@ -84,7 +84,7 @@ mmdetection
 
 ***Requirement: Directory structure of `datasets` should be as follows.***
 ```
-mmdetection
+HubMap_2023_2nd_Place_Solution
 └── datasets
     ├── test                        # extracted hubmap-hacking-the-human-vasculature dataset
     ├── train                       # extracted hubmap-hacking-the-human-vasculature dataset
