@@ -93,7 +93,7 @@ HubMap_2023_2nd_Place_Solution
     ├── tile_meta.csv               # extracted hubmap-hacking-the-human-vasculature dataset
     └── wsi_meta.csv                # extracted hubmap-hacking-the-human-vasculature dataset 
 ``` 
-### How to create `hm_1cls` (COCO Format) and `stain_augs`
+#### How to create `hm_1cls` (COCO Format) and `stain_augs`
 ```python
     # create hm_1cls
     cd hubmap_dataprocessing/
@@ -105,7 +105,7 @@ HubMap_2023_2nd_Place_Solution
 
     cd ..
 ```
-### How to create `train_9tiles_crop128`, `hm_9tiles_crop128_1cls` (COCO Format), and `stain_9tiles_augs`
+#### How to create `train_9tiles_crop128`, `hm_9tiles_crop128_1cls` (COCO Format), and `stain_9tiles_augs`
 ```python
     # create train_9tiles_crop128
     cd hubmap_dataprocessing/
